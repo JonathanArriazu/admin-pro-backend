@@ -10,16 +10,16 @@ const app = express();
 //Configurar CORS
 app.use(cors())
 
+//Lectura y parseo del body
+app.use( express.json() );
+
 //Base de datos
 dbConecction();
 
 //Rutas: app.get(), app.put(), app.delete(), app.post()
-app.get( '/', (req, res) => {
-    res.status(400).json({
-        ok: true,
-        msg: 'Hola mundo!'
-    })
-} );
+app.use('/api/usuarios', require('./routes/usuarios')); //Con esto, cualquier peticion que venga desde api/usuarios, va a ser respondida por el routes/usuarios
+
+
 
 app.listen( process.env.PORT, () => {
     console.log('Servidor corriendo en puerto ' + 3000);

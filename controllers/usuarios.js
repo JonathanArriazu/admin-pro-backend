@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 
 
 const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
     
@@ -35,13 +36,17 @@ const crearUsuario = async (req, res = response) => {
         //Un salt es un numero o data generada de manera aleatoria
         const salt = bcrypt.genSaltSync();
         usuario.password = bcrypt.hashSync( password, salt )
-
+        
         //Guardo usuario:
         await usuario.save();
 
+        //Generar el TOKEN - JWT
+        const token = await generarJWT(usuario.id);
+
         res.status(400).json({
             ok: true,
-            usuario
+            usuario,
+            token
         })
     } catch (error) {
         console.log(error);

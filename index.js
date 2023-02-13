@@ -18,6 +18,7 @@ dbConecction();
 
 //Rutas: app.get(), app.put(), app.delete(), app.post()
 app.use('/api/usuarios', require('./routes/usuarios')); //Con esto, cualquier peticion que venga desde api/usuarios, va a ser respondida por el routes/usuarios
+app.use('/api/login', require('./routes/auth'));
 
 
 

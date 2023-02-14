@@ -26,6 +26,9 @@ router.post(     //ruta esta formada por el ('path', midelware o [midelware], co
 
 router.put( '/:id',
     [
+        validarJWT,
+        check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+        validarCampos
     ],
     actualizarHospital
 );

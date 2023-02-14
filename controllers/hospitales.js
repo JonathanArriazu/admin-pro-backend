@@ -1,11 +1,15 @@
 const { response } = require('express');
 const Hospital = require('../models/hospital');
 
-const getHospitales = (req, res = response) => {
+const getHospitales = async (req, res = response) => {
 
+    const hospitales = await Hospital.find() //Con esto traigo a todos los hospitales junto con el id de la persona que lo creo
+                                     .populate('usuario', 'nombre email img')
+                                    //Pero, me gustaria no solo saber el id de esa persona, tambien quiero saber su nombre, email, img
+                                    //es por eso que uso .populate e ingreso esos datos dentro de la propiedad "usuario"
     res.json({
         ok: true,
-        msg: 'getHospitales'
+        hospitales
     })
 
 }

@@ -17,6 +17,10 @@ router.get( '/',getMedicos);
 router.post(     //ruta esta formada por el ('path', midelware o [midelware], controlador)
     '/',
     [
+        validarJWT,
+        check('nombre', 'El nombre del medico es necesario').not().isEmpty(),
+        check('hospital', 'El ID del Hospital debe de ser válido').isMongoId(),
+        validarCampos
     ], 
     crearMedico
 );

@@ -9,6 +9,7 @@ const HospitalSchema = Schema({
         type: String,
     },
     usuario: { //Para saber que usuario es el que creo ese hospital
+        require: true,
         type: Schema.Types.ObjectId, //Esto indica que hay una relacion entre
         ref: 'Usuario'//               este Schema y el de Usuario
     }

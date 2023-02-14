@@ -17,6 +17,9 @@ router.get( '/',getHospitales);
 router.post(     //ruta esta formada por el ('path', midelware o [midelware], controlador)
     '/',
     [
+        validarJWT,
+        check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+        validarCampos
     ], 
     crearHospital
 );
